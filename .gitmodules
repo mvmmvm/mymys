@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@mvmmvm:mvmmvm/mymys-frontend.git
+[submodule "backend"]
+	path = backend
+	url = git@mvmmvm:mvmmvm/mymys-backend.git

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    image: postgres:16
+    ports:
+      - 3306:3306
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      TZ: Asia/Tokyo
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile.local
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    tty: true
+    ports:
+      - '3000:3000'
+    volumes: 
+      - ./backend:/app
+  frontend: 
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile.local
+    volumes:
+      - ./frontend:/app
+    command: bash -c "npm uninstall next && npm install next && yarn dev -p 8080"
+    ports:
+      - "8080:8080"
+volumes:
+  pg_data:

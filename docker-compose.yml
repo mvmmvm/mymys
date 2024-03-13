@@ -16,10 +16,13 @@ services:
       dockerfile: Dockerfile.local
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     tty: true
+    stdin_open: true
     ports:
       - '3000:3000'
     volumes: 
       - ./backend:/app
+    environment:
+      - ACCESS_TOKEN=${ACCESS_TOKEN}
   frontend: 
     build:
       context: ./frontend/

@@ -23,6 +23,10 @@ services:
       - ./backend:/app
     environment:
       - ACCESS_TOKEN=${ACCESS_TOKEN}
+      - REDIS_URL=${REDIS_URL}
+    restart: always
+    depends_on:
+      - db
   frontend: 
     build:
       context: ./frontend/
@@ -32,5 +36,6 @@ services:
     command: bash -c "npm uninstall next && npm install next && yarn dev -p 8080"
     ports:
       - "8080:8080"
+    
 volumes:
   pg_data:

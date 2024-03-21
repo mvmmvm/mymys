@@ -22,8 +22,9 @@ services:
     volumes: 
       - ./backend:/app
     environment:
-      - ACCESS_TOKEN=${ACCESS_TOKEN}
+      - GPT_ACCESS_TOKEN=${GPT_ACCESS_TOKEN}
       - REDIS_URL=${REDIS_URL}
+      - CLAUDE_ACCESS_TOKEN=${CLAUDE_ACCESS_TOKEN}
     restart: always
     depends_on:
       - db

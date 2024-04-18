@@ -7,13 +7,28 @@ https://drive.google.com/file/d/1XLFnNdyAmHqlE9-l6-ipyPVm7pcgqEVe/view?usp=shari
 ### 環境構築方法
 
 1. 初回のみ管理者に.envファイルを共有してもらい、プロジェクト直下に入れて下さい。
-2. 下記のコマンドを打ちます。
+2. 下記のコマンドを打ってdockerを立ち上げます（フロントエンドとバックエンドがどちらも立ち上がります）
 ```
 docker compose build
 ```
+
+
+- 開発時
 ```
-docker compose up
+docker compose --env-file .backend/.env.dev up
 ```
+- LINE Messaging API対応用にバックエンドのURLをパブリックにします。
+```
+ngrok tunnel --label edge=edghts_2egMflIWsl9k5PC6yjGBKHnfWa2 http://localhost:3000
+```
+
+
+- デプロイ時
+```
+docker compose --env-file .backend/.env.prod up
+```
+
+
 - 初回のみ
 ```
 docker compose exec web bash
